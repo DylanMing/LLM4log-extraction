@@ -1,0 +1,181 @@
+2024-09-17 01:05:00.895 | INFO     | __main__:main:29 - Log file created at: result\result_2024-09-17_01-05-00_256k file5 extract t=0.4 top_p=0.8\log_2024-09-17_01-05-00_80448.txt
+2024-09-17 01:05:00.896 | INFO     | __main__:main:30 - experiment comment:None
+2024-09-17 01:05:00.896 | INFO     | __main__:main:36 - RUN_ID: 80448
+2024-09-17 01:05:00.896 | INFO     | __main__:main:39 - Running in inference mode
+2024-09-17 01:05:00.897 | INFO     | __main__:main:40 - --------------------------------------------------------------------------------
+2024-09-17 01:05:00.897 | INFO     | __main__:main:44 - PROJECT_ID: log-analysis-433902
+2024-09-17 01:05:00.898 | INFO     | __main__:main:45 - LOCATION: asia-east1
+2024-09-17 01:05:00.898 | INFO     | __main__:main:46 - MODEL_NAME: gemini-1.5-pro
+2024-09-17 01:05:00.898 | INFO     | __main__:main:47 - system_instruction: []
+2024-09-17 01:05:00.899 | INFO     | __main__:main:48 - prompt: You are a network specilist and informaticien. Your job is to extract all the text value of the following entities: {URL(domain)}, {IP}, {compuation resources} from a log file.
+The contents must only include text strings found in the document.Each contents only appear in response one time. Please list them in different catagories.
+The resulst should be in JSON format verified the response schema.Please distince the ip and urls, ips are all numbers and dots, and urls are strings,numbers and dots.",
+Please find all the ip and url from the log file. Don not make up IP and URL, they are real values from the log file.
+--------------------------------------------------
+Here is some examples:
+right example 1:
+input text:
+Aug  3 06:20:35 combo ftpd[28839]: connection from 211.107.232.1 () at Wed Aug  3 06:20:35 2005 
+output：
+{
+    "IP": ["211.107.232.1"],
+    "URL": []
+    "memory": {"Memory available": "", "Memory total": "", "apg memory": ""}}
+}
+reasoning:
+This is a right example because 211.107.232.1 is an IP address, and there is no URL and memory mentioned in the input text.
+---
+right example 2:
+input text:
+Aug  4 07:00:29 combo sshd(pam_unix)[31672]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=arx58.internetdsl.tpnet.pl 
+output：
+{
+    "IP": [],
+    "URL": ["arx58.internetdsl.tpnet.pl"]
+    "memory": {"Memory available": "", "Memory total": "", "apg memory": ""}}
+}
+reasoning:
+This is a right example because arx58.internetdsl.tpnet.pl is an url, and there is no IP and memory mentioned in the input text.
+---
+right example 3:
+input text:
+Aug  7 06:52:07 combo ftpd[16258]: connection from 82.53.83.190 (host190-83.pool8253.interbusiness.it) at Sun Aug  7 06:52:07 2005 
+output：
+{
+    "IP": ["82.53.83.190"],
+    "URL": ["host190-83.pool8253.interbusiness.it"]
+    "memory": {"Memory available": "", "Memory total": "", "apg memory": ""}}
+}
+reasoning:
+This is a right example because 82.53.83.190 is an IP address, and host190-83.pool8253.interbusiness.it is an URL. There is no memory mentioned in the input text.
+---
+right example 4:
+input text:
+Jun  9 06:06:20 combo kernel: Memory: 125312k/129720k available (1540k kernel code, 3860k reserved, 599k data, 144k init, 0k highmem)
+Jun  9 06:06:21 combo kernel: agpgart: Maximum main memory to use for agp memory: 93M
+output:
+{
+    "IP": [],
+    "URL": []
+    "memory": {"Memory available": "125312k", "Memory total": "129720k", "apg memory": "93M"}}
+}
+reasoning:
+This is a right example because Memory: 125312k/129720k and agp memory: 93M are memory mentioned in the input text. There is no IP and URL mentioned in the input text.
+---
+wrong example 1:
+input text:
+Jan  9 17:35:55 combo ftpd[6505]: connection from 60.45.101.89 (p15025-ipadfx01yosida.nagano.ocn.ne.jp) at Mon Jan  9 17:35:55 2006
+output：
+{
+    "IP": ["60.45.101.89","p15025-ipadfx01yosida.nagano.ocn.ne.jp"],
+    "URL": []
+    "memory": {"Memory available": "", "Memory total": "", "apg memory": ""}}
+}
+reasoning: this is a wrong example because 60.45.101.89 is an IP address and p15025-ipadfx01yosida.nagano.ocn.ne.jp is an URL
+---
+wrong example 2:
+input text:
+Jul  9 22:53:19 combo ftpd[24085]: connection from 206.196.21.129 (host129.206.196.21.maximumasp.com) at Sat Jul  9 22:53:19 2005  
+output：
+{
+    "IP": [],
+    "URL": ["206.196.21.129 (host129.206.196.21.maximumasp.com)"],
+    "memory": {"Memory available": "", "Memory total": "", "apg memory": ""}}
+}
+reasoning: this is a wrong example because 206.196.21.129 is a IP and host129.206.196.21.maximumasp.com is a URL,it should be seprate as an IP and an URL
+---
+wrong example 3:
+input text:
+Jul  9 22:53:22 combo ftpd[24073]: connection from 206.196.21.129 (host129.206.196.21.maximumasp.com) at Sat Jul  9 22:53:22 2005 
+Jul 10 03:55:15 combo ftpd[24513]: connection from 217.187.83.139 () at Sun Jul 10 03:55:15 2005 
+output：
+{
+    "IP": ["206.196.21.129"],
+    "URL": ["host129.206.196.21.maximumasp.com"],
+    "memory: {"Memory available": "", "Memory total": "", "apg memory": ""}}
+}
+reasoning: this is a wrong example because 217.187.83.139 is also an IP
+---
+wrong example 4:
+input text:
+Oct  1 06:50:49 combo sshd(pam_unix)[12386]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=llekm-static-203.200.147.8.vsnl.net.in
+output：
+{
+    "IP": ["203.200.147.8"],
+    "URL": [],
+    "memory": {"Memory available": "", "Memory total": "", "apg memory": ""}}
+}
+reasoning: this is a wrong example because 203.200.147.8 is a part of url llekm-static-203.200.147.8.vsnl.net.in, it should not be seperated as an IP
+---
+wrong example 5:
+input text:
+Nov 12 12:21:24 combo ftpd[32401]: connection from 64.27.5.9 (merton.whererwerunning.com) at Sat Nov 12 12:21:24 2005 
+output：
+{
+    "IP": ["64.27.5.9"],
+    "URL": ["merton.whererwerunning.com","whererwerunning.com"],
+    "memory": {"Memory available": "", "Memory total": "", "apg memory": ""}}
+}
+reasoning: this is a wrong example because whererwerunning.com is a part of url merton.whererwerunning.com, it should not be seperated.
+---
+wrong example 6:
+input text:
+Feb  2 11:34:17 combo sshd(pam_unix)[3965]: authentication failure; logname= uid=0 euid=0 tty=NODEVssh ruser= rhost=c-69-248-142-135.hsd1.nj.comcast.net
+output：
+{
+    "IP": ["c-69-248-142-135.hsd1.nj.comcast.net"],
+    "URL": [],
+    "memory": {"Memory available": "", "Memory total": "", "apg memory": ""}}
+}
+reasoning: this is a wrong example because c-69-248-142-135.hsd1.nj.comcast.net is an url
+-------
+please extract all the IP, URL and memory from the input log file:
+
+
+2024-09-17 01:05:00.908 | INFO     | log_ex_pro:vertexai_init:68 - initial the model
+2024-09-17 01:05:00.909 | INFO     | log_ex_pro:vertexai_init:69 - Project ID: log-analysis-433902
+2024-09-17 01:05:00.909 | INFO     | log_ex_pro:vertexai_init:70 - Location: asia-east1
+2024-09-17 01:05:00.909 | INFO     | log_ex_pro:vertexai_init:71 - Model Name: gemini-1.5-pro
+2024-09-17 01:05:00.910 | INFO     | log_ex_pro:vertexai_init:77 - Model system_instrcution []
+2024-09-17 01:05:00.910 | INFO     | __main__:main:63 - process the 0th chunk, save to result\result_2024-09-17_01-05-00_256k file5 extract t=0.4 top_p=0.8\inference_output\output0.json
+2024-09-17 01:05:36.377 | INFO     | log_ex_pro:write_response:56 - Generated response in result\result_2024-09-17_01-05-00_256k file5 extract t=0.4 top_p=0.8\inference_output\output0.json
+2024-09-17 01:05:36.378 | INFO     | utils.eval_util_test:evaluate_result:226 - Running in test mode
+2024-09-17 01:05:36.378 | INFO     | utils.eval_util_test:evaluate_result:227 - loading results
+2024-09-17 01:05:36.379 | INFO     | utils.eval_util_test:evaluate_result:231 - llm_result_file: result\result_2024-09-17_01-05-00_256k file5 extract t=0.4 top_p=0.8\inference_output/output0.json
+2024-09-17 01:05:36.379 | INFO     | utils.eval_util_test:evaluate_result:232 - re_result_file: data/splited data/9-256x1024/result-re_Linux_5.json
+2024-09-17 01:05:36.379 | INFO     | utils.eval_util_test:evaluate_result:233 - human_result_file: data/splited data/9-256x1024/result_huaman_Linux_5.json
+2024-09-17 01:05:36.381 | INFO     | utils.eval_util_test:evaluate_result:238 - human resut as standard
+2024-09-17 01:05:36.382 | INFO     | utils.eval_util_test:evaluate_result:240 - num of ip in human result:12
+2024-09-17 01:05:36.382 | INFO     | utils.eval_util_test:evaluate_result:241 - num of url in human result:9
+2024-09-17 01:05:36.382 | INFO     | utils.eval_util_test:evaluate_result:242 - num of ip in llm result:18
+2024-09-17 01:05:36.382 | INFO     | utils.eval_util_test:evaluate_result:243 - num of url in llm result:17
+2024-09-17 01:05:36.383 | INFO     | utils.eval_util_test:evaluate_result:246 - --------------------------------------------------------------------------------
+2024-09-17 01:05:36.384 | INFO     | utils.eval_util_test:evaluate_result:253 - miss case between llm and human:1,0
+2024-09-17 01:05:36.386 | INFO     | utils.eval_util_test:evaluate_result:263 - miss case between llm and re:1,1
+2024-09-17 01:05:36.388 | INFO     | utils.eval_util_test:evaluate_result:273 - miss case between re and human:0,0
+2024-09-17 01:05:36.389 | INFO     | utils.eval_util_test:evaluate_result:278 - --------------------------------------------------------------------------------
+2024-09-17 01:05:36.389 | INFO     | utils.eval_util_test:evaluate_result:281 - exchange missed classify url and ip for result of llm to get pure llm result
+2024-09-17 01:05:36.390 | INFO     | utils.eval_util_test:pure_llm:115 - nums of IP in URL:1
+2024-09-17 01:05:36.390 | INFO     | utils.eval_util_test:pure_llm:116 - IP in url['211.114.109.131']
+2024-09-17 01:05:36.391 | INFO     | utils.eval_util_test:pure_llm:123 - nums of URL in IP:0
+2024-09-17 01:05:36.391 | INFO     | utils.eval_util_test:pure_llm:124 - URL in ip[]
+2024-09-17 01:05:36.391 | INFO     | utils.eval_util_test:pure_llm:129 - nums of pure IP:17
+2024-09-17 01:05:36.392 | INFO     | utils.eval_util_test:pure_llm:130 - nums of pure URL:16
+2024-09-17 01:05:36.392 | INFO     | utils.eval_util_test:pure_llm:134 - new add llm IP['211.114.109.131']
+2024-09-17 01:05:36.392 | INFO     | utils.eval_util_test:pure_llm:135 - new add llm url[]
+2024-09-17 01:05:36.394 | INFO     | utils.eval_util_test:evaluate_result:289 - num of ip in pure_llm_result:18
+2024-09-17 01:05:36.394 | INFO     | utils.eval_util_test:evaluate_result:290 - num of url in pure_llm_result:16
+2024-09-17 01:05:36.395 | INFO     | utils.eval_util_test:evaluate_result:291 - --------------------------------------------------------------------------------
+2024-09-17 01:05:36.396 | INFO     | utils.eval_util_test:evaluate_result:299 - miss case between pure_llm and human:0,0
+2024-09-17 01:05:36.397 | INFO     | utils.eval_util_test:evaluate_result:310 - miss case between pure_llm and re:0,1
+2024-09-17 01:05:36.399 | INFO     | utils.eval_util_test:evaluate_result:320 - miss case between re and human: 0,0
+2024-09-17 01:05:36.399 | INFO     | utils.eval_util_test:evaluate_result:326 - --------------------------------------------------------------------------------
+2024-09-17 01:05:36.400 | INFO     | utils.eval_util_test:evaluate_result:333 - bad case between llm and human:6,8
+2024-09-17 01:05:36.402 | INFO     | utils.eval_util_test:evaluate_result:344 - bad case between pure_llm and human:6,7
+2024-09-17 01:05:36.402 | INFO     | utils.eval_util_test:evaluate_result:349 - --------------------------------------------------------------------------------
+2024-09-17 01:05:36.402 | INFO     | utils.eval_util_test:evaluate_result:352 - recall of llm(0.9166666666666666, 1.0)
+2024-09-17 01:05:36.403 | INFO     | utils.eval_util_test:evaluate_result:353 - recall of pure_llm(1.0, 1.0)
+2024-09-17 01:05:36.403 | INFO     | utils.eval_util_test:evaluate_result:356 - recall of re(1.0, 1.0)
+2024-09-17 01:05:36.403 | INFO     | utils.eval_util_test:evaluate_result:358 - precision of llm(0.6470588235294118, 0.5294117647058824)
+2024-09-17 01:05:36.404 | INFO     | utils.eval_util_test:evaluate_result:359 - precision of pure_llm(0.6666666666666666, 0.5625)
+2024-09-17 01:05:36.404 | INFO     | utils.eval_util_test:evaluate_result:362 - precision of re(1.0, 0.9)

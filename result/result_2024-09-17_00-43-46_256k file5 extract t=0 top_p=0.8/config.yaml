@@ -1,0 +1,23 @@
+comment: 256k file5 extract t=0 top_p=0.8
+dataset:
+  log_file: data/splited data/9-256x1024/Linux_5.txt
+exp_dir: result
+exp_name: result_2024-09-17_00-43-46_256k file5 extract t=0 top_p=0.8
+exp_time: 2024-09-17_00-43-46
+inference:
+  chunk_size: null
+  count: false
+  prompt: prompt_extract
+  save_path: result
+model:
+  LOCATION: asia-east1
+  MODEL_NAME: gemini-1.5-pro
+  PROJECT_ID: log-analysis-433902
+  temperature: 0
+  top_p: 0.8
+run_id: '24156'
+save_dir: result\result_2024-09-17_00-43-46_256k file5 extract t=0 top_p=0.8
+test:
+  human_result_file: data/splited data/9-256x1024/result_huaman_Linux_5.json
+  llm_result_file: ''
+  re_result_file: data/splited data/9-256x1024/result-re_Linux_5.json

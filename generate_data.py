@@ -168,7 +168,7 @@ if __name__ == "__main__":
     orginal_file = "data/Linux.txt"
     save_dir = "test"
     refer_file = "result/human_evaluation.json"
-    chunk_size = 128 * 1024  # 1MB
+    chunk_size = 256 * 1024  #
 
     # split file and save
     split_file_size(orginal_file, chunk_size, save_dir)

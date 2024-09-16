@@ -1,41 +1,32 @@
 from utils.arg_helper import parse_arguments, get_config
-from utils.utiles import import_prompt, file_chunks, merge_new_json_files, merge_json_files, read_log_file
+from utils.utils import (
+    import_prompt,
+    file_chunks,
+    merge_new_json_files,
+    merge_json_files,
+    read_log_file,
+)
+from utils.vertex_ai_model import vertexai_init, get_response
 # from utils.re_extract import evaluate_result
 from utils.eval_util_test import evaluate_result
 from loguru import logger
 import os
 
-from log_ex_pro import get_response, vertexai_init
-
-
-from prompt.prompt_test import (
-    system_instruction,
-    parameters,
-    response_schema,
-    context,
-    safety_config,
-)
-
-# from prompt_test import (
-#     system_instruction,
-#     parameters,
-#     response_schema,
-#     context,
-#     safety_config,
-# )
 
 
 def main():
 
     # if using proxy, uncomment below lines and set proxy address
-    os.environ['HTTP_PROXY'] = 'http://127.0.0.1:10809'
-    os.environ['HTTPs_PROXY'] = 'http://127.0.0.1:10809'
+    os.environ["HTTP_PROXY"] = "http://127.0.0.1:10809"
+    os.environ["HTTPs_PROXY"] = "http://127.0.0.1:10809"
 
     args = parse_arguments()
     config = get_config(args.config_file)
     prompt_template = config.inference.prompt
     prompt = f"prompt.{prompt_template}"
-    system_instruction, parameters, response_schema, context, safety_config = import_prompt(prompt)
+    system_instruction, parameters, response_schema, context, safety_config = (
+        import_prompt(prompt)
+    )
 
     logger.info("Starting the application")
     log_file = os.path.join(
@@ -88,7 +79,9 @@ def main():
             )
         if config.inference.chunk_size:
             if config.inference.count:
-                merge_new_json_files(inference_dir, f"{inference_dir}/merged_output.json")
+                merge_new_json_files(
+                    inference_dir, f"{inference_dir}/merged_output.json"
+                )
             else:
                 merge_json_files(inference_dir, f"{inference_dir}/merged_output.json")
             config.test.llm_result_file = f"{inference_dir}/merged_output.json"
