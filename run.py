@@ -7,11 +7,11 @@ from utils.utils import (
     read_log_file,
 )
 from utils.vertex_ai_model import vertexai_init, get_response
+
 # from utils.re_extract import evaluate_result
 from utils.eval_util_test import evaluate_result
 from loguru import logger
 import os
-
 
 
 def main():

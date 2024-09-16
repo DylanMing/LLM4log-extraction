@@ -5,7 +5,8 @@ from loguru import logger
 
 
 def split_file_size(file_path, size_per_file, save_path):
-    """split big file into small files with specified size，and save into specified folder
+    """split big file into small files with specified size，
+    and save into specified folder
     file_path: file to split
     size_per_file: size of each small file in bytes,e.g. 512*1024 for 512KB
     save_path: dir path to save small files
