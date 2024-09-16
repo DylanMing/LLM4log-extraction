@@ -13,6 +13,7 @@ inference:
   save_path: "result"
   chunk_size: 128*1024
   count: True
+  prompt: prompt_extract
 test:
   llm_result_file: "result/128k-18-result/merge_128k_18.json"
   re_result_file: "data/count_result-re_Linux.json"

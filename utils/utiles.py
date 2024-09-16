@@ -1,7 +1,21 @@
 import os
 from loguru import logger
 import json
+import importlib
 
+
+def import_prompt(prompt_file):
+    '''import prompt from prompt file'''
+    module_name = prompt_file
+    module = importlib.import_module(module_name)
+
+    return (
+        module.system_instruction,
+        module.parameters,
+        module.response_schema,
+        module.context,
+        module.safety_config,
+    )
 
 def read_log_file(file_path):
     """read log file(txt) and return its content"""

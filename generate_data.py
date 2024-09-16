@@ -137,7 +137,7 @@ def get_human_json(refer_path, text_path, save_dir):
 
 
 def get_extract_re(text_path, save_name):
-    """extract IPs and URLfrom log file using regular expression
+    """extract IPs and URL from log file using regular expression
     text_path: path of text to search
     save_dir: dir path to save result
     """
@@ -168,7 +168,7 @@ if __name__ == "__main__":
     orginal_file = "data/Linux.txt"
     save_dir = "test"
     refer_file = "result/human_evaluation.json"
-    chunk_size = 1024 * 1024  # 1MB
+    chunk_size = 128 * 1024  # 1MB
 
     # split file and save
     split_file_size(orginal_file, chunk_size, save_dir)
