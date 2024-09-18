@@ -42,14 +42,13 @@ The use of api need specific the project in the google cloud account.
 
 ## test running
 
-Due to the network problem, sometimes google service is not stable, run `test-vertextapi-connection.py` to test the connection of vertextai api(default model is Gemini-1.5-flash). 
+Due to the network problem, sometimes google service is not stable, run `test-vertextapi-connection.py` to test the connection of vertextai api(default model is Gemini-1.5-flash).
 
 ```bash
 python test-vertexapi-connection.py
 ```
 
 If there is no problem of connection, and experiment get no response, the request may limited by the [quota](https://console.cloud.google.com/apis/api/aiplatform.googleapis.com/quotas) (filte for model Gemini-1.5-pro)).
-
 
 ## vertext ai api setting
 
@@ -367,3 +366,9 @@ reasoning: this is a wrong example because 211.107.232.1 appear 5 times but extr
 ```
 
 some wrong examples are added for correct the bad case in experiment.
+
+
+
+# draw
+
+run in `draw.ipynb`
