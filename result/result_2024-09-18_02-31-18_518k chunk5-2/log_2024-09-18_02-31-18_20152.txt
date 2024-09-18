@@ -1,0 +1,43 @@
+2024-09-18 02:31:18.611 | INFO     | __main__:main:36 - Log file created at: result\result_2024-09-18_02-31-18_518k chunk5\log_2024-09-18_02-31-18_20152.txt
+2024-09-18 02:31:18.611 | INFO     | __main__:main:37 - experiment comment:None
+2024-09-18 02:31:18.612 | INFO     | __main__:main:43 - RUN_ID: 20152
+2024-09-18 02:31:18.612 | INFO     | utils.eval_util_test:evaluate_result:226 - Running in test mode
+2024-09-18 02:31:18.612 | INFO     | utils.eval_util_test:evaluate_result:227 - loading results
+2024-09-18 02:31:18.613 | INFO     | utils.eval_util_test:evaluate_result:231 - llm_result_file: result/result-2024-08-06-13-45-27/merged.json
+2024-09-18 02:31:18.613 | INFO     | utils.eval_util_test:evaluate_result:232 - re_result_file: data/result-re_Linux.json
+2024-09-18 02:31:18.613 | INFO     | utils.eval_util_test:evaluate_result:233 - human_result_file: data/human_evaluation.json
+2024-09-18 02:31:18.615 | INFO     | utils.eval_util_test:evaluate_result:238 - human resut as standard
+2024-09-18 02:31:18.615 | INFO     | utils.eval_util_test:evaluate_result:240 - num of ip in human result:352
+2024-09-18 02:31:18.616 | INFO     | utils.eval_util_test:evaluate_result:241 - num of url in human result:241
+2024-09-18 02:31:18.616 | INFO     | utils.eval_util_test:evaluate_result:242 - num of ip in llm result:238
+2024-09-18 02:31:18.616 | INFO     | utils.eval_util_test:evaluate_result:243 - num of url in llm result:133
+2024-09-18 02:31:18.616 | INFO     | utils.eval_util_test:evaluate_result:246 - --------------------------------------------------------------------------------
+2024-09-18 02:31:18.618 | INFO     | utils.eval_util_test:evaluate_result:253 - miss case between llm and human:166,134
+2024-09-18 02:31:18.619 | INFO     | utils.eval_util_test:evaluate_result:263 - miss case between llm and re:173,151
+2024-09-18 02:31:18.620 | INFO     | utils.eval_util_test:evaluate_result:273 - miss case between re and human:0,7
+2024-09-18 02:31:18.620 | INFO     | utils.eval_util_test:evaluate_result:278 - --------------------------------------------------------------------------------
+2024-09-18 02:31:18.621 | INFO     | utils.eval_util_test:evaluate_result:281 - exchange missed classify url and ip for result of llm to get pure llm result
+2024-09-18 02:31:18.621 | INFO     | utils.eval_util_test:pure_llm:115 - nums of IP in URL:15
+2024-09-18 02:31:18.621 | INFO     | utils.eval_util_test:pure_llm:116 - IP in url['211.115.206.155', '202.85.177.225', '61.74.86.1', '220.117.241.3', '62.205.38.26', '63.107.208.121', '218.108.234.71', '60.190.64.139', '210.118.169.249', '203.223.40.241', '194.78.219.195', '86.193.48.194', '218.90.137.90', '213.197.195.245', '62.154.184.86']
+2024-09-18 02:31:18.622 | INFO     | utils.eval_util_test:pure_llm:123 - nums of URL in IP:50
+2024-09-18 02:31:18.622 | INFO     | utils.eval_util_test:pure_llm:124 - URL in ip['kulab-6-33.cpc.ku.ac.th', 'user-12ldoks.cable.mindspring.com', 'mail.3-plan.ru', 'p549E7BA5.dip.t-dialin.net', 'stat.62-123-40-155.atlanet.it', 'srv2.alfahost.nl', 'host123-105.pool8288.interbusiness.it', 'lneuilly-152-22-93-12.w193-251.abo.wanadoo.fr', 'pcp0012132427pcs.benslm01.pa.comcast.net', 'l03m-212-194-100-8.d4.club-internet.fr', 'customer-201-134-69-250.uninet-ide.com.mx', 'vit94-2-82-66-253-141.fbx.proxad.net', 'i222-150-132-171.s02.a012.ap.plala.or.jp', 'dpc6682015008.direcpc.com', 'p213.54.172.95.tisdip.tiscali.de', 'adsl-64-171-127-90.dsl.sndg02.pacbell.net', 'pc3.digi-aube-unet.ocn.ne.jp', 'p54A0B08D.dip0.t-ipconnect.de', 'p549A68CF.dip.t-dialin.net', 'user-10cm1iq.cable.mindspring.com', '61-218-41-150.hinet-ip.hinet.net', 'iorganet3.teleson.ro', 'p5785FD9E.dip0.t-ipconnect.de', '211-76-104-65.ebix.net.tw', 'host26-58.pool81112.interbusiness.it', 'www.lssu.edu', 'www.shatura.com', '200-207-16-97.dsl.telesp.net.br', '202-132-40-29.adsl.ttn.net', 'mail2.systemsevolution.com', 'solutions93.cobalt.com', 'ulm9-d9bdb268.pool.mediaWays.net', 'co-f-211-78-4-214.kgex.com.tw', 'llekm-static-203.200.147.8.vsnl.net.in', 'sym.gdsz.cncnet.net', 'h9-203-73-31.seed.net.tw', '61-218-185-123.hinet-ip.hinet.net', 'fparas.securepathways.com', '85-95-176-2.saransk.ru', 'ASte-Genev-Bois-152-1-28-68.w83-114.abo.wanadoo.fr', 'dms.geos.ntnu.edu.tw', '211-232-147-37.nexg.net', '88-213-181-81-cable.canals.ro', 'www.etsin.upm.es', 'mail.23rhodes.net', 's010600112fb9bd72.vf.shawcable.net', 'ponteix.ssd.sk.ca', 'secure.vision-xxl.com', 'cpe-68-206-240-214.houston.res.rr.com', 'squid.netcomputers.ro']
+2024-09-18 02:31:18.623 | INFO     | utils.eval_util_test:pure_llm:129 - nums of pure IP:188
+2024-09-18 02:31:18.624 | INFO     | utils.eval_util_test:pure_llm:130 - nums of pure URL:118
+2024-09-18 02:31:18.624 | INFO     | utils.eval_util_test:pure_llm:134 - new add llm IP['211.115.206.155', '218.90.137.90', '202.85.177.225', '218.108.234.71', '220.117.241.3', '210.118.169.249', '194.78.219.195']
+2024-09-18 02:31:18.624 | INFO     | utils.eval_util_test:pure_llm:135 - new add llm url['61-218-185-123.hinet-ip.hinet.net', 'mail2.systemsevolution.com', 'fparas.securepathways.com', 'l03m-212-194-100-8.d4.club-internet.fr', 'user-12ldoks.cable.mindspring.com', 'host123-105.pool8288.interbusiness.it', 'co-f-211-78-4-214.kgex.com.tw', 'h9-203-73-31.seed.net.tw', '200-207-16-97.dsl.telesp.net.br', 'pcp0012132427pcs.benslm01.pa.comcast.net', 'cpe-68-206-240-214.houston.res.rr.com', 'ulm9-d9bdb268.pool.mediaWays.net', 'pc3.digi-aube-unet.ocn.ne.jp', 'host26-58.pool81112.interbusiness.it', 'adsl-64-171-127-90.dsl.sndg02.pacbell.net', 'llekm-static-203.200.147.8.vsnl.net.in', 'i222-150-132-171.s02.a012.ap.plala.or.jp']
+2024-09-18 02:31:18.626 | INFO     | utils.eval_util_test:evaluate_result:289 - num of ip in pure_llm_result:195
+2024-09-18 02:31:18.626 | INFO     | utils.eval_util_test:evaluate_result:290 - num of url in pure_llm_result:135
+2024-09-18 02:31:18.626 | INFO     | utils.eval_util_test:evaluate_result:291 - --------------------------------------------------------------------------------
+2024-09-18 02:31:18.627 | INFO     | utils.eval_util_test:evaluate_result:299 - miss case between pure_llm and human:159,117
+2024-09-18 02:31:18.629 | INFO     | utils.eval_util_test:evaluate_result:310 - miss case between pure_llm and re:166,134
+2024-09-18 02:31:18.629 | INFO     | utils.eval_util_test:evaluate_result:320 - miss case between re and human: 0,7
+2024-09-18 02:31:18.630 | INFO     | utils.eval_util_test:evaluate_result:326 - --------------------------------------------------------------------------------
+2024-09-18 02:31:18.631 | INFO     | utils.eval_util_test:evaluate_result:333 - bad case between llm and human:52,26
+2024-09-18 02:31:18.632 | INFO     | utils.eval_util_test:evaluate_result:344 - bad case between pure_llm and human:2,11
+2024-09-18 02:31:18.632 | INFO     | utils.eval_util_test:evaluate_result:349 - --------------------------------------------------------------------------------
+2024-09-18 02:31:18.632 | INFO     | utils.eval_util_test:evaluate_result:352 - recall of llm(0.5284090909090909, 0.44398340248962653)
+2024-09-18 02:31:18.633 | INFO     | utils.eval_util_test:evaluate_result:353 - recall of pure_llm(0.5482954545454546, 0.5145228215767634)
+2024-09-18 02:31:18.633 | INFO     | utils.eval_util_test:evaluate_result:356 - recall of re(1.0, 0.970954356846473)
+2024-09-18 02:31:18.633 | INFO     | utils.eval_util_test:evaluate_result:358 - precision of llm(0.7815126050420168, 0.8045112781954887)
+2024-09-18 02:31:18.634 | INFO     | utils.eval_util_test:evaluate_result:359 - precision of pure_llm(0.9897435897435898, 0.9185185185185185)
+2024-09-18 02:31:18.634 | INFO     | utils.eval_util_test:evaluate_result:362 - precision of re(0.9777777777777777, 0.9105058365758755)

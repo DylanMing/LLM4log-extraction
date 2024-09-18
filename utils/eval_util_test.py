@@ -341,11 +341,23 @@ def evaluate_result(config):
         bad_case_pure_llm_human,
         os.path.join(config.save_dir, "bad_case_pure_llm_human.json"),
     )
+
     logger.info(
         "bad case between pure_llm and human:{},{}".format(
             len(bad_case_pure_llm_human["IP"]), len(bad_case_pure_llm_human["URL"])
         )
     )
+    
+    bad_case_re_human = get_bad_case(re_result, human_result, config.inference.count)
+    save_json_file(
+        bad_case_re_human, os.path.join(config.save_dir, "bad_case_re_human.json")
+    )
+    logger.info(
+        "bad case between re and human:{},{}".format(
+            len(bad_case_re_human["IP"]), len(bad_case_re_human["URL"])
+        )
+    )
+    
     logger.info("-" * 80)
     # recall and precision of llm and pure_llm
 

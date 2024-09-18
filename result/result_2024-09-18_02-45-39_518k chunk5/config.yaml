@@ -1,0 +1,23 @@
+comment: 518k chunk5
+dataset:
+  log_file: data/splited data/9-256x1024/Linux_1.txt
+exp_dir: result
+exp_name: result_2024-09-18_02-45-39_518k chunk5
+exp_time: 2024-09-18_02-45-39
+inference:
+  chunk_size: null
+  count: false
+  prompt: prompt_oneshot
+  save_path: result
+model:
+  LOCATION: us-central1
+  MODEL_NAME: gemini-1.5-pro
+  PROJECT_ID: log-analysis-433902
+  temperature: 0
+  top_p: 0.8
+run_id: '24832'
+save_dir: result\result_2024-09-18_02-45-39_518k chunk5
+test:
+  human_result_file: data/human_evaluation.json
+  llm_result_file: result/result_2024-08-13_11-07-51-518k/merged.json
+  re_result_file: data/result-re_Linux.json

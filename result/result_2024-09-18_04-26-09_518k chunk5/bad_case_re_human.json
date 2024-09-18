@@ -1,0 +1,37 @@
+{
+    "IP": [
+        "059.45.101.203",
+        "68.143.156.89",
+        "146.210.71.217",
+        "151.195.95.61",
+        "69.59.170.12",
+        "203.94.231.54",
+        "203.200.147.8",
+        "213.50.3.6"
+    ],
+    "URL": [
+        "smartd.conf",
+        "bugs.build.redhat.com",
+        "home.com",
+        "uk.sistina.com",
+        "XFree86.0.log",
+        "ld.so.cache",
+        "kernel.sysrq",
+        "initramfs...it",
+        "sendmail.sendmail",
+        "ld-linux.so",
+        "vortex.html",
+        "0.99.newide",
+        "www.scyld.com",
+        "rpc.statd",
+        "smartmontools.sourceforge.net",
+        "kernel.core",
+        "nfs4.idtoname",
+        "lvm.static",
+        "rpc.idmapd",
+        "net.ipv4.conf.default.rp",
+        "in.rexecd",
+        "veritas.com",
+        "named.conf"
+    ]
+}

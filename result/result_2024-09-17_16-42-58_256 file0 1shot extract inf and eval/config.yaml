@@ -1,0 +1,23 @@
+comment: 256 all file extract inf and eval
+dataset:
+  log_file: data/Linux.txt
+exp_dir: result
+exp_name: result_2024-09-17_16-42-58_256 all file extract inf and eval
+exp_time: 2024-09-17_16-42-58
+inference:
+  chunk_size: 256*1024
+  count: false
+  prompt: prompt_oneshot
+  save_path: result
+model:
+  LOCATION: asia-east2
+  MODEL_NAME: gemini-1.5-pro
+  PROJECT_ID: log-analysis-433902
+  temperature: 0.2
+  top_p: 0.8
+run_id: '21604'
+save_dir: result\result_2024-09-17_16-42-58_256 all file extract inf and eval
+test:
+  human_result_file: data/human_evaluation.json
+  llm_result_file: ''
+  re_result_file: data/result-re_Linux.json
