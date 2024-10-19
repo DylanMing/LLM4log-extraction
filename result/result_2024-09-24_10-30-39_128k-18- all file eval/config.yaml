@@ -1,0 +1,23 @@
+comment: 128k-18- all file eval
+dataset:
+  log_file: data/splited data/9-256x1024/Linux_1.txt
+exp_dir: result
+exp_name: result_2024-09-24_10-30-39_128k-18- all file eval
+exp_time: 2024-09-24_10-30-39
+inference:
+  chunk_size: null
+  count: false
+  prompt: prompt_oneshot
+  save_path: result
+model:
+  LOCATION: us-central1
+  MODEL_NAME: gemini-1.5-pro
+  PROJECT_ID: log-analysis-433902
+  temperature: 0
+  top_p: 0.8
+run_id: '68556'
+save_dir: result\result_2024-09-24_10-30-39_128k-18- all file eval
+test:
+  human_result_file: data/human_evaluation.json
+  llm_result_file: result/128k-18-result/merge_128k_18.json
+  re_result_file: data/result-re_Linux.json

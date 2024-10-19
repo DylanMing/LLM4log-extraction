@@ -1,8 +1,0 @@
-2024-09-10 12:04:07.941 | INFO     | __main__:main:42 - Log file created at: result\result_2024-09-10_12-04-07_128k file 17\log_2024-09-10_12-04-07_59488.txt
-2024-09-10 12:04:07.942 | INFO     | __main__:main:43 - experiment comment:None
-2024-09-10 12:04:07.942 | INFO     | __main__:main:49 - RUN_ID: 59488
-2024-09-10 12:04:07.943 | INFO     | utils.eval_util:evaluate_result:196 - Running in test mode
-2024-09-10 12:04:07.943 | INFO     | utils.eval_util:evaluate_result:197 - loading results
-2024-09-10 12:04:07.943 | INFO     | utils.eval_util:evaluate_result:201 - llm_result_file: result/128k-18-result/merge_17.json
-2024-09-10 12:04:07.944 | INFO     | utils.eval_util:evaluate_result:202 - re_result_file: dresult/128k-18-result/human_17/human_17.json
-2024-09-10 12:04:07.944 | INFO     | utils.eval_util:evaluate_result:203 - human_result_file: result/128k-18-result/human_17/human_17.json

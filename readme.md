@@ -1,5 +1,39 @@
 extract ip,url from server log with vertex ai : gemini-1.5-pro
 
+# project structure
+
+```bash
+————————————
+|-- config
+|-- data
+|-- prompt
+|-- result
+|-- utils
+|-- draw.ipynb
+|-- generate_data.py
+|-- run.py
+|-- test.ipynb
+```
+
+
+Folders:
+
+- config : yaml comfig files, setting parameters
+- data: original and preprocessed data
+- prompt: prompt for llm
+- result： store results
+- utils:  some tools functions
+
+Files:
+
+- draw.ipynb: draw results
+- generate_data.py: generate preprocess data, include chunks, regular expression data and human eval data (extract result and count result)
+- run.py : main file
+- test.ipynb: test
+
+
+
+
 # environtment setup
 
 Different from openAI api or other api using `api key`, Gemini api need set `gcloud cli` to authentication.
@@ -366,8 +400,6 @@ reasoning: this is a wrong example because 211.107.232.1 appear 5 times but extr
 ```
 
 some wrong examples are added for correct the bad case in experiment.
-
-
 
 # draw
 

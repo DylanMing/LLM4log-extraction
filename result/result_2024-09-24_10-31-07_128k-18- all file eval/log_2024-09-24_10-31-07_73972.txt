@@ -1,0 +1,14 @@
+2024-09-24 10:31:07.211 | INFO     | __main__:main:36 - Log file created at: result\result_2024-09-24_10-31-07_128k-18- all file eval\log_2024-09-24_10-31-07_73972.txt
+2024-09-24 10:31:07.212 | INFO     | __main__:main:37 - experiment comment:None
+2024-09-24 10:31:07.212 | INFO     | __main__:main:43 - RUN_ID: 73972
+2024-09-24 10:31:07.213 | INFO     | utils.eval_util_test:evaluate_result:226 - Running in test mode
+2024-09-24 10:31:07.213 | INFO     | utils.eval_util_test:evaluate_result:227 - loading results
+2024-09-24 10:31:07.213 | INFO     | utils.eval_util_test:evaluate_result:231 - llm_result_file: result/128k-18-result/merge_128k_18.json
+2024-09-24 10:31:07.214 | INFO     | utils.eval_util_test:evaluate_result:232 - re_result_file: data/result-re_Linux.json
+2024-09-24 10:31:07.214 | INFO     | utils.eval_util_test:evaluate_result:233 - human_result_file: data/human_evaluation.json
+2024-09-24 10:31:07.216 | INFO     | utils.eval_util_test:evaluate_result:238 - human resut as standard
+2024-09-24 10:31:07.217 | INFO     | utils.eval_util_test:evaluate_result:240 - num of ip in human result:352
+2024-09-24 10:31:07.217 | INFO     | utils.eval_util_test:evaluate_result:241 - num of url in human result:241
+2024-09-24 10:31:07.217 | INFO     | utils.eval_util_test:evaluate_result:242 - num of ip in llm result:380
+2024-09-24 10:31:07.218 | INFO     | utils.eval_util_test:evaluate_result:243 - num of url in llm result:175
+2024-09-24 10:31:07.218 | INFO     | utils.eval_util_test:evaluate_result:246 - --------------------------------------------------------------------------------
