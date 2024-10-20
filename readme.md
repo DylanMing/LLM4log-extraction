@@ -15,14 +15,13 @@ extract ip,url from server log with vertex ai : gemini-1.5-pro
 |-- test.ipynb
 ```
 
-
 Folders:
 
 - [config](#config) : yaml comfig files, setting parameters
-- data: original and preprocessed data
-- prompt: prompt for llm
-- result： store results
-- utils:  some tools functions
+- [data](#data): original and preprocessed data
+- [prompt](#prompt): prompt for llm
+- [result](#result)： store results
+- [utils](#utils):  some tools functions
 
 Files:
 
@@ -66,7 +65,7 @@ model:
     - `temperature` : control the diversity of out put token, smaller for less diversity, $\frac{e^\frac{x_{i}}{T}}{\sum\limits_{j=1}^{V}e^{\frac{x^{j}}{T}}}$
     - `top_p`: generature tokens from the given probability range(0.8 means chose token from total probability of 0.8 )
 
-> google project ID setting see [google cloud vertext ai](https://console.cloud.google.com/vertex-ai) 
+> google project ID setting see [google cloud vertext ai](https://console.cloud.google.com/vertex-ai)
 
 inference
     - `save_path`: save folder path for inference result
@@ -79,10 +78,66 @@ test
     - `re_result_file`: regular expression result file path
     - `human_result_file`: human evaluation result file path
 
-- comment: experiment comments, shows in the result file name
+- `comment`: experiment comments, shows in the result file name
 
-# data
-The original log file is `data/Linux.txt` , using [vertex AI studio](https://console.cloud.google.com/vertex-ai/studio) count the file are split into 1152k=1.152M tokens
+## data
+
+In data folder:
+```bash
+
+├── splited data
+├── Linux.txt
+├── count_human_evaluation.json
+├── count_result-re_Linux.json
+├── human_evaluation.json
+└── result-re_Linux.json
+
+```
+
+The original log file is `data/Linux.txt` , using count the file are split into 1152k=1.152M tokens
+
+`count_human_evaluation.json` and `count_result-re_Linux.json` are the standard result, they are manually extracted and count with regular expression.
+
+`human_evaluation.json` and `result-re_Linux.json` are the standard result, they are manually extracted.
+
+`splited data` saved the chunked log file, each folder include splited log files,regular expression result and human evaluation result.
+
+## prompt
+saved different prompts
+```bash
+├── prompt_count.py
+├── prompt_extract.py
+└── prompt_oneshot.py
+```
+`prompt_count.py`: prompt for extract andcount the log file
+
+`prompt_extract.py`: prompt for extract the IP and URL from log file
+
+`prompt_oneshot.py`: prompt for oneshot extraction
+
+
+## result
+save the results of experiment, including the inference result, regular expression result, human evaluation result, missed case and bad case.
+
+`repeat.json` shows the repeat case, 
+`structure output1` and `structure output2` shows the initial test for extraction
+
+## utils
+
+```bash
+├── arg_helper.py
+├── eval_util.py
+├── eval_util_test.py
+├── utils.py
+└── vertex_ai_model.py
+```
+`arg_helper.py`: parse the [command line arguments](#examples) and read [config file](#config), they can be used as attributes of the class `config`
+
+`eval_util.py`and `eval_util_test.py`: evaluate the result, mainly for count and extract result, using `evaluate_result` method, it recieve the standard result and inference result, and return the evaluation result including precision, recall for IP and URL, can count results, generated bad case and missed case.
+
+`utils.py`: some tools functions, `import_prompt` import prompt from file, and return the prompt and parameters for llm, `file_chunks` split the log file into chunks,receive the log file path and chunk size, return the list of chunked text.`merge_new_json_files` merge the count json files, `merge_json_files` merge the extracted json files,`read_log_file` read the log files
+
+`vertex_ai_model.py`: load the vertext ai model and get response
 
 
 # environtment setup
@@ -190,14 +245,6 @@ this will extract the IP, URL, computational consomation and evaluate, the misse
 
 # model parameters and prompt consturction
 
-model parameters and prompts are stored in `prompt.py`/`prompt_test.py`
-
-## model parameters
-
-in dict `parameters`
-
-* `temperature` : control the diversity of out put token, smaller for less diversity, $\frac{e^\frac{x_{i}}{T}}{\sum\limits_{j=1}^{V}e^{\frac{x^{j}}{T}}}$
-* `top-p`: generature tokens from the given probability range(0.8 means chose token from total probability of 0.8 )
 
 ## prompt
 
