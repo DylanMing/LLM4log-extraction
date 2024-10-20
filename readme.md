@@ -18,7 +18,7 @@ extract ip,url from server log with vertex ai : gemini-1.5-pro
 
 Folders:
 
-- config : yaml comfig files, setting parameters
+- [config](#config) : yaml comfig files, setting parameters
 - data: original and preprocessed data
 - prompt: prompt for llm
 - result： store results
@@ -29,9 +29,60 @@ Files:
 - draw.ipynb: draw results
 - generate_data.py: generate preprocess data, include chunks, regular expression data and human eval data (extract result and count result)
 - run.py : main file
-- test.ipynb: test
+- test.ipynb: test api connection, regular expression et.al
 
+## config
 
+```yaml
+dataset:
+  log_file: "data/Linux.txt"
+model:
+  PROJECT_ID : "log-analysis-433902"
+  # LOCATION : "us-central1"
+  LOCATION : "asia-east1"
+  # LOCATION : "asia-east2"
+  MODEL_NAME : "gemini-1.5-pro"
+  temperature: 0.2
+  top_p: 0.8
+inference:
+  save_path: "result"
+  chunk_size: 192*1024
+  count: False
+  prompt: prompt_extract
+test:
+  llm_result_file: "result/result_2024-09-10_17-13-04_all file 192k-12 only extraction/inference_output/merged.json"
+  re_result_file: "data/result-re_Linux.json"
+  human_result_file: "data/human_evaluation.json"
+comment: "all file 192k-12 extraction test"
+```
+
+dataset
+    - `log_file`: input server log file path
+
+model:
+    - `PROJECT_ID`: google cloud project id-
+    - `LOCATION`: google cloud location
+    - `MODEL_NAME`: model name, `gemini-1.5-pro` for this project
+    - `temperature` : control the diversity of out put token, smaller for less diversity, $\frac{e^\frac{x_{i}}{T}}{\sum\limits_{j=1}^{V}e^{\frac{x^{j}}{T}}}$
+    - `top_p`: generature tokens from the given probability range(0.8 means chose token from total probability of 0.8 )
+
+> google project ID setting see [google cloud vertext ai](https://console.cloud.google.com/vertex-ai) 
+
+inference
+    - `save_path`: save folder path for inference result
+    - `chunk_size`: chunk size for spliting the log file, 192k=192*1024
+    - `count`:  count or extract result with llm
+    - `prompt`: prompt file path
+
+test
+    - `llm_result_file`: inference result file path
+    - `re_result_file`: regular expression result file path
+    - `human_result_file`: human evaluation result file path
+
+- comment: experiment comments, shows in the result file name
+
+# data
+The original log file is `data/Linux.txt` , using [vertex AI studio](https://console.cloud.google.com/vertex-ai/studio) count the file are split into 1152k=1.152M tokens
 
 
 # environtment setup
