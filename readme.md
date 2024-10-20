@@ -25,10 +25,10 @@ Folders:
 
 Files:
 
-- draw.ipynb: draw results
-- generate_data.py: generate preprocess data, include chunks, regular expression data and human eval data (extract result and count result)
-- run.py : main file
-- test.ipynb: test api connection, regular expression et.al
+- `draw.ipynb`: draw results
+- `generate_data.py`: generate preprocess data, include chunks, regular expression data and human eval data (extract result and count result)
+- `run.py` : main file
+- `test.ipynb`: test api connection, regular expression...
 
 ## config
 
@@ -83,6 +83,7 @@ test
 ## data
 
 In data folder:
+
 ```bash
 
 ├── splited data
@@ -103,23 +104,26 @@ The original log file is `data/Linux.txt` , using count the file are split into 
 `splited data` saved the chunked log file, each folder include splited log files,regular expression result and human evaluation result.
 
 ## prompt
+
 saved different prompts
+
 ```bash
 ├── prompt_count.py
 ├── prompt_extract.py
 └── prompt_oneshot.py
 ```
+
 `prompt_count.py`: prompt for extract andcount the log file
 
 `prompt_extract.py`: prompt for extract the IP and URL from log file
 
 `prompt_oneshot.py`: prompt for oneshot extraction
 
-
 ## result
+
 save the results of experiment, including the inference result, regular expression result, human evaluation result, missed case and bad case.
 
-`repeat.json` shows the repeat case, 
+`repeat.json` shows the repeat case,
 `structure output1` and `structure output2` shows the initial test for extraction
 
 ## utils
@@ -131,6 +135,7 @@ save the results of experiment, including the inference result, regular expressi
 ├── utils.py
 └── vertex_ai_model.py
 ```
+
 `arg_helper.py`: parse the [command line arguments](#examples) and read [config file](#config), they can be used as attributes of the class `config`
 
 `eval_util.py`and `eval_util_test.py`: evaluate the result, mainly for count and extract result, using `evaluate_result` method, it recieve the standard result and inference result, and return the evaluation result including precision, recall for IP and URL, can count results, generated bad case and missed case.
@@ -138,7 +143,6 @@ save the results of experiment, including the inference result, regular expressi
 `utils.py`: some tools functions, `import_prompt` import prompt from file, and return the prompt and parameters for llm, `file_chunks` split the log file into chunks,receive the log file path and chunk size, return the list of chunked text.`merge_new_json_files` merge the count json files, `merge_json_files` merge the extracted json files,`read_log_file` read the log files
 
 `vertex_ai_model.py`: load the vertext ai model and get response
-
 
 # environtment setup
 
@@ -182,11 +186,7 @@ The use of api need specific the project in the google cloud account.
 
 ## test running
 
-Due to the network problem, sometimes google service is not stable, run `test-vertextapi-connection.py` to test the connection of vertextai api(default model is Gemini-1.5-flash).
-
-```bash
-python test-vertexapi-connection.py
-```
+Due to the network problem, sometimes google service is not stable, run [test.ipynb]()  to test the connection of vertextai api(default model is Gemini-1.5-flash).
 
 If there is no problem of connection, and experiment get no response, the request may limited by the [quota](https://console.cloud.google.com/apis/api/aiplatform.googleapis.com/quotas) (filte for model Gemini-1.5-pro)).
 
@@ -243,10 +243,7 @@ this will extract the IP, URL, computational consomation and evaluate, the misse
 * `-m` comments for experiment
 * `-l` logger print level
 
-# model parameters and prompt consturction
-
-
-## prompt
+# prompt design
 
 prompt are constructed with 4 parts:
 
@@ -257,7 +254,7 @@ prompt are constructed with 4 parts:
 
 system instruction are used in initing the model but seems the same when we move it into context
 
-## safty config
+# safty config
 
 Response candidate content has no parts (and thus no text). The candidate is likely blocked by the safety filters.
 
@@ -313,9 +310,11 @@ safety_config = {
     )
 ```
 
-## prompt analyse
+# prompt analyse
 
-### instruction
+the prompt are changed several times for better performance, we introduced few-shot learning and chain of thought , which make llm better understand our tasks.
+
+## instruction
 
 > You are a network specilist and informaticien.
 >
@@ -347,7 +346,7 @@ verify the json schema and telling the specific rules to reduce misclassificatio
 
 improve recall and precision, reduce miss case and make up.
 
-### examples
+## examples
 
 ```
 Here is some examples:
