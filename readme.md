@@ -237,11 +237,18 @@ run extract with vertex ai use the command:
 python run.py -c "config/config.yaml" -m "this is a comment for experiment" -l debug
 ```
 
-this will extract the IP, URL, computational consomation and evaluate, the missed case and bad will save in the json file
+this will extract the IP, URL and evaluate, the missed case and bad will save in the json file
+
+if simple eavluate the result, please modifiy the config file and run:
+
+```bash
+python run.py -c "config/config.yaml" -t
+```
 
 * `-c` config file path
 * `-m` comments for experiment
 * `-l` logger print level
+* `-t`  test/evaluation the result
 
 # prompt design
 
@@ -500,4 +507,4 @@ some wrong examples are added for correct the bad case in experiment.
 
 # draw
 
-run in `draw.ipynb`
+results visualisation run in `draw.ipynb`
